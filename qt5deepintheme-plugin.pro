@@ -9,9 +9,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets widgets-private
 
 TARGET = qdeepin
 TEMPLATE = lib
-CONFIG += plugin link_pkgconfig
+CONFIG += plugin link_pkgconfig c++11
 
-PKGCONFIG += mtdev dde-file-manager
+PKGCONFIG += mtdev dde-file-manager dtkbase dtkwidget
 
 PLUGIN_TYPE = platformthemes
 PLUGIN_EXTENDS = -
@@ -21,10 +21,14 @@ PLUGIN_CLASS_NAME = QDeepinTheme
 
 SOURCES += qdeepintheme.cpp \
     main.cpp \
-    qdeepinfiledialoghelper.cpp
+    qdeepinfiledialoghelper.cpp \
+    qdeepinplatformmenu.cpp \
+    qdeepinplatformmenuitem.cpp
 
 HEADERS += qdeepintheme.h \
-    qdeepinfiledialoghelper.h
+    qdeepinfiledialoghelper.h \
+    qdeepinplatformmenu.h \
+    qdeepinplatformmenuitem.h
 DISTFILES += \
     deepin.json
 
@@ -32,3 +36,6 @@ unix {
     target.path = $$[QT_INSTALL_PLUGINS]/platformthemes
     INSTALLS += target
 }
+
+RESOURCES += \
+    theme.qrc

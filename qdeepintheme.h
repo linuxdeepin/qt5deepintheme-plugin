@@ -10,15 +10,22 @@ class QDeepinTheme : public QGenericUnixTheme
 public:
     QDeepinTheme();
 
+    QPlatformMenuItem* createPlatformMenuItem() const Q_DECL_OVERRIDE;
+    QPlatformMenu* createPlatformMenu() const Q_DECL_OVERRIDE;
+
     bool usePlatformNativeDialog(DialogType type) const Q_DECL_OVERRIDE;
     QPlatformDialogHelper *createPlatformDialogHelper(DialogType type) const Q_DECL_OVERRIDE;
+
+    QPixmap standardPixmap(StandardPixmap sp, const QSizeF &size) const Q_DECL_OVERRIDE;
 
     static const char *name;
 
 private:
     static bool m_usePlatformNativeDialog;
+    static bool m_usePlatformNativeMenu;
 
     friend class QDeepinFileDialogHelper;
+    friend class QDeepinPlatformMenu;
 };
 
 #endif // QDEEPINTHEME_H
