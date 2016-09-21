@@ -23,10 +23,7 @@ QDeepinPlatformMenu::QDeepinPlatformMenu()
     menu = new QMenu();
 
     if (DApplication::isDXcbPlatform()) {
-        DPlatformWindowHandle handle(menu);
-
-        handle.setEnableSystemMove(false);
-        handle.setEnableSystemResize(false);
+        DPlatformWindowHandle::enableDXcbForWindow(menu);
     }
 
     QFile file(":/menu.qss");

@@ -153,6 +153,20 @@ void QDeepinFileDialogHelper::applyOptions()
             dialog->setLabelText((QFileDialog::DialogLabel)i, options->labelText((QFileDialogOptions::DialogLabel)i));
         }
     }
+
+    dialog->setFilter(options->filter());
+    dialog->widget()->setWindowTitle(options->windowTitle());
+    dialog->setViewMode((QFileDialog::ViewMode)options->viewMode());
+    dialog->setFileMode((QFileDialog::FileMode)options->fileMode());
+    dialog->setAcceptMode((QFileDialog::AcceptMode)options->acceptMode());
+    dialog->setNameFilters(options->nameFilters());
+
+    setDirectory(options->initialDirectory());
+
+    foreach (const QUrl &filename, options->initiallySelectedFiles())
+        selectFile(filename);
+
+    selectNameFilter(options->initiallySelectedNameFilter());
 }
 
 QT_END_NAMESPACE
