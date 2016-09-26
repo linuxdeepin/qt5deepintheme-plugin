@@ -29,6 +29,7 @@ HEADERS += qdeepintheme.h \
     qdeepinfiledialoghelper.h \
     qdeepinplatformmenu.h \
     qdeepinplatformmenuitem.h
+
 DISTFILES += \
     deepin.json
 
@@ -39,3 +40,7 @@ unix {
 
 RESOURCES += \
     theme.qrc
+
+CONFIG(release, debug|release) {
+    DEFINES += QT_NO_DEBUG_OUTPUT
+}
