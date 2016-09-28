@@ -4,12 +4,16 @@
 #include <QDialog>
 #include <QEvent>
 #include <QWindow>
-#include <QDebug>
 #include <QApplication>
+#include <QLocale>
+#include <QTranslator>
+#include <QDebug>
 
 #include <private/qwidgetwindow_p.h>
 
 #include <dfiledialoghandle.h>
+#include <dfmstandardpaths.h>
+#include <dfmglobal.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -135,6 +139,13 @@ void QDeepinFileDialogHelper::ensureDialog() const
         return;
 
     QDeepinTheme::m_usePlatformNativeDialog = false;
+
+    QTranslator translator;
+
+    if (translator.load(DFMStandardPaths::standardLocation(DFMStandardPaths::TranslationPath)
+                        + QDir::separator() + DFMGlobal::applicationName() + "_" + QLocale::system().name())) {
+        qApp->installTranslator(&translator);
+    }
 
     dialog = new DFileDialogHandle();
 
