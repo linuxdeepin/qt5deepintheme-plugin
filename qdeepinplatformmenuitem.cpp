@@ -26,19 +26,21 @@ quintptr QDeepinPlatformMenuItem::tag() const
 
 void QDeepinPlatformMenuItem::setText(const QString &text)
 {
-    action->setText(text);
+    if (action)
+        action->setText(text);
 }
 
 void QDeepinPlatformMenuItem::setIcon(const QIcon &icon)
 {
-    action->setIcon(icon);
+    if (action)
+        action->setIcon(icon);
 }
 
 void QDeepinPlatformMenuItem::setMenu(QPlatformMenu *menu)
 {
     QDeepinPlatformMenu *dmenu = qobject_cast<QDeepinPlatformMenu*>(menu);
 
-    if (dmenu)
+    if (dmenu && action)
         action->setMenu(dmenu->menu);
 }
 
@@ -84,27 +86,32 @@ void QDeepinPlatformMenuItem::setRole(QPlatformMenuItem::MenuRole role)
         break;
     }
 
-    action->setMenuRole(menu_role);
+    if (action)
+        action->setMenuRole(menu_role);
 }
 
 void QDeepinPlatformMenuItem::setCheckable(bool checkable)
 {
-    action->setCheckable(checkable);
+    if (action)
+        action->setCheckable(checkable);
 }
 
 void QDeepinPlatformMenuItem::setChecked(bool isChecked)
 {
-    action->setChecked(isChecked);
+    if (action)
+        action->setChecked(isChecked);
 }
 
 void QDeepinPlatformMenuItem::setShortcut(const QKeySequence &shortcut)
 {
-    action->setShortcut(shortcut);
+    if (action)
+        action->setShortcut(shortcut);
 }
 
 void QDeepinPlatformMenuItem::setEnabled(bool enabled)
 {
-    action->setEnabled(enabled);
+    if (action)
+        action->setEnabled(enabled);
 }
 
 void QDeepinPlatformMenuItem::setIconSize(int size)

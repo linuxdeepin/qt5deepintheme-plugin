@@ -17,21 +17,21 @@ QDeepinTheme::QDeepinTheme()
 
 }
 
-QPlatformMenuItem *QDeepinTheme::createPlatformMenuItem() const
-{
-    if (!m_usePlatformNativeMenu)
-        return 0;
+//QPlatformMenuItem *QDeepinTheme::createPlatformMenuItem() const
+//{
+//    if (!m_usePlatformNativeMenu)
+//        return 0;
 
-    return new QDeepinPlatformMenuItem;
-}
+//    return new QDeepinPlatformMenuItem;
+//}
 
-QPlatformMenu *QDeepinTheme::createPlatformMenu() const
-{
-    if (!m_usePlatformNativeMenu)
-        return 0;
+//QPlatformMenu *QDeepinTheme::createPlatformMenu() const
+//{
+//    if (!m_usePlatformNativeMenu)
+//        return 0;
 
-    return new QDeepinPlatformMenu;
-}
+//    return new QDeepinPlatformMenu;
+//}
 
 bool QDeepinTheme::usePlatformNativeDialog(DialogType type) const
 {
