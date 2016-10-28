@@ -171,6 +171,7 @@ void QDeepinFileDialogHelper::applyOptions()
     dialog->setFileMode((QFileDialog::FileMode)options->fileMode());
     dialog->setAcceptMode((QFileDialog::AcceptMode)options->acceptMode());
     dialog->setNameFilters(options->nameFilters());
+    dialog->setOptions((QFileDialog::Options)(int)options->options());
 
     setDirectory(options->initialDirectory());
 
