@@ -3,6 +3,8 @@
 
 #include <qpa/qplatformdialoghelper.h>
 
+#include <QPointer>
+
 QT_BEGIN_NAMESPACE
 
 class DFileDialogHandle;
@@ -11,6 +13,7 @@ class QDeepinFileDialogHelper : public QPlatformFileDialogHelper
 {
 public:
     QDeepinFileDialogHelper();
+    ~QDeepinFileDialogHelper();
 
     bool show(Qt::WindowFlags flags, Qt::WindowModality modality, QWindow *parent) Q_DECL_OVERRIDE;
     void exec() Q_DECL_OVERRIDE;
@@ -26,7 +29,7 @@ public:
     QString selectedNameFilter() const Q_DECL_OVERRIDE;
 
 private:
-    mutable DFileDialogHandle *dialog = Q_NULLPTR;
+    mutable QPointer<DFileDialogHandle> dialog;
 
     void ensureDialog() const;
     void applyOptions();

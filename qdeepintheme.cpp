@@ -3,6 +3,8 @@
 #include "qdeepinplatformmenu.h"
 #include "qdeepinplatformmenuitem.h"
 
+#include <dfmglobal.h>
+
 #include <QVariant>
 #include <QDebug>
 
@@ -14,7 +16,7 @@ bool QDeepinTheme::m_usePlatformNativeMenu = true;
 
 QDeepinTheme::QDeepinTheme()
 {
-
+    DFMGlobal::installTranslator();
 }
 
 //QPlatformMenuItem *QDeepinTheme::createPlatformMenuItem() const
