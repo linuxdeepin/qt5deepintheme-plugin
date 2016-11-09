@@ -8,7 +8,7 @@ Standards-Version: 3.9.6
 
 Package: libqt5deepintheme-plugin
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5qgtk2,
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5libqgtk2,
 Multi-Arch: same
 Description: Qt5 Platform Theme Plugin.
  .
