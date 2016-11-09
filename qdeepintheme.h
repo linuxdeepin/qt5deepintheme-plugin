@@ -18,6 +18,8 @@ public:
 
     QPixmap standardPixmap(StandardPixmap sp, const QSizeF &size) const Q_DECL_OVERRIDE;
 
+    QVariant themeHint(ThemeHint hint) const Q_DECL_OVERRIDE;
+
     static const char *name;
 
 private:
