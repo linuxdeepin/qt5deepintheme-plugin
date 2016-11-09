@@ -11,7 +11,7 @@ TARGET = qdeepin
 TEMPLATE = lib
 CONFIG += plugin link_pkgconfig c++11
 
-PKGCONFIG += mtdev dde-file-manager dtkbase dtkwidget
+PKGCONFIG += mtdev dde-file-manager dtkbase dtkwidget Qt5Xdg
 
 PLUGIN_TYPE = platformthemes
 PLUGIN_EXTENDS = -
@@ -23,12 +23,14 @@ SOURCES += qdeepintheme.cpp \
     main.cpp \
     qdeepinfiledialoghelper.cpp \
     qdeepinplatformmenu.cpp \
-    qdeepinplatformmenuitem.cpp
+    qdeepinplatformmenuitem.cpp \
+    diconproxyengine.cpp
 
 HEADERS += qdeepintheme.h \
     qdeepinfiledialoghelper.h \
     qdeepinplatformmenu.h \
-    qdeepinplatformmenuitem.h
+    qdeepinplatformmenuitem.h \
+    diconproxyengine.h
 
 DISTFILES += \
     deepin.json

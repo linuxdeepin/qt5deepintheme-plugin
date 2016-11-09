@@ -2,11 +2,14 @@
 #include "qdeepinfiledialoghelper.h"
 #include "qdeepinplatformmenu.h"
 #include "qdeepinplatformmenuitem.h"
+#include "diconproxyengine.h"
 
 #include <dfmglobal.h>
 
 #include <QVariant>
 #include <QDebug>
+
+#include <XdgIcon>
 
 QT_BEGIN_NAMESPACE
 
@@ -49,6 +52,18 @@ QPlatformDialogHelper *QDeepinTheme::createPlatformDialogHelper(DialogType type)
         return m_usePlatformNativeDialog ? new QDeepinFileDialogHelper() : Q_NULLPTR;
 
     return QGenericUnixTheme::createPlatformDialogHelper(type);
+}
+
+QIconEngine *QDeepinTheme::createIconEngine(const QString &iconName) const
+{
+    XdgIcon::setThemeName(QIcon::themeName());
+
+    const QIcon &icon = XdgIcon::fromTheme(iconName);
+
+    if (icon.availableSizes().isEmpty())
+        return 0;
+
+    return new DIconProxyEngine(icon);
 }
 
 QPixmap QDeepinTheme::standardPixmap(QPlatformTheme::StandardPixmap sp, const QSizeF &size) const

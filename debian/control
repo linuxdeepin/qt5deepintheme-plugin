@@ -3,12 +3,12 @@ Section: devel
 Priority: optional
 Maintainer: Deepin Sysdev <sysdev@deepin.com>
 Build-Depends: debhelper (>= 9), qt5-default, qtbase5-dev, qtbase5-private-dev,
-	pkg-config, libdde-file-manager-dev
+	pkg-config, libdde-file-manager-dev, libqt5xdg-dev
 Standards-Version: 3.9.6
 
 Package: libqt5deepintheme-plugin
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5libqgtk2,
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5libqgtk2
 Multi-Arch: same
 Description: Qt5 Platform Theme Plugin.
  .

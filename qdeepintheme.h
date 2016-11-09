@@ -16,6 +16,7 @@ public:
     bool usePlatformNativeDialog(DialogType type) const Q_DECL_OVERRIDE;
     QPlatformDialogHelper *createPlatformDialogHelper(DialogType type) const Q_DECL_OVERRIDE;
 
+    QIconEngine *createIconEngine(const QString &iconName) const Q_DECL_OVERRIDE;
     QPixmap standardPixmap(StandardPixmap sp, const QSizeF &size) const Q_DECL_OVERRIDE;
 
     QVariant themeHint(ThemeHint hint) const Q_DECL_OVERRIDE;
