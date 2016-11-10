@@ -19,7 +19,7 @@ public:
     QIconEngine *createIconEngine(const QString &iconName) const Q_DECL_OVERRIDE;
     QPixmap standardPixmap(StandardPixmap sp, const QSizeF &size) const Q_DECL_OVERRIDE;
 
-//    QVariant themeHint(ThemeHint hint) const Q_DECL_OVERRIDE;
+    QVariant themeHint(ThemeHint hint) const Q_DECL_OVERRIDE;
 
     static const char *name;
 

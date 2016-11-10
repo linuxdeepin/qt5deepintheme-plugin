@@ -77,21 +77,24 @@ QPixmap QDeepinTheme::standardPixmap(QPlatformTheme::StandardPixmap sp, const QS
     return QGenericUnixTheme::standardPixmap(sp, size);
 }
 
-//QVariant QDeepinTheme::themeHint(QPlatformTheme::ThemeHint hint) const
-//{
-//    switch (hint) {
-//    case QPlatformTheme::StyleNames: {
-//        QStringList styleNames;
-//        // TODO(hualet): Make ddark&dlight styles ready!
-//        // styleNames << QStringLiteral("dlight");
-//        styleNames << QStringLiteral("GTK+") << QStringLiteral("fusion");
-//        return QVariant(styleNames);
-//    }
-//    default:
-//        break;
-//    }
+QVariant QDeepinTheme::themeHint(QPlatformTheme::ThemeHint hint) const
+{
+    switch (hint) {
+    case QPlatformTheme::StyleNames: {
+        QStringList styleNames;
+        // TODO(hualet): Make ddark&dlight styles ready!
+        // styleNames << QStringLiteral("dlight");
+#ifndef QT_NO_STYLE_GTK
+        styleNames << QStringLiteral("GTK+");
+#endif
+        styleNames << QStringLiteral("fusion");
+        return QVariant(styleNames);
+    }
+    default:
+        break;
+    }
 
-//    return QPlatformTheme::themeHint(hint);
-//}
+    return QGenericUnixTheme::themeHint(hint);
+}
 
 QT_END_NAMESPACE
