@@ -11,15 +11,40 @@
 
 #include <XdgIcon>
 
+#include <private/qicon_p.h>
+
+#undef signals
+#include <gtk/gtk.h>
+
+#include <X11/Xlib.h>
+
 QT_BEGIN_NAMESPACE
 
 const char *QDeepinTheme::name = "deepin";
 bool QDeepinTheme::m_usePlatformNativeDialog = true;
 bool QDeepinTheme::m_usePlatformNativeMenu = true;
 
+static QString gtkSetting(const gchar *propertyName)
+{
+    GtkSettings *settings = gtk_settings_get_default();
+    gchararray value;
+    g_object_get(settings, propertyName, &value, NULL);
+    QString str = QString::fromUtf8(value);
+    g_free(value);
+    return str;
+}
+
 QDeepinTheme::QDeepinTheme()
 {
     DFMGlobal::installTranslator();
+
+    // gtk_init will reset the Xlib error handler, and that causes
+    // Qt applications to quit on X errors. Therefore, we need to manually restore it.
+    int (*oldErrorHandler)(Display *, XErrorEvent *) = XSetErrorHandler(NULL);
+
+    gtk_init(0, 0);
+
+    XSetErrorHandler(oldErrorHandler);
 }
 
 //QPlatformMenuItem *QDeepinTheme::createPlatformMenuItem() const
@@ -56,14 +81,12 @@ QPlatformDialogHelper *QDeepinTheme::createPlatformDialogHelper(DialogType type)
 
 QIconEngine *QDeepinTheme::createIconEngine(const QString &iconName) const
 {
-    XdgIcon::setThemeName(QIcon::themeName());
-
-    const QIcon &icon = XdgIcon::fromTheme(iconName);
+    QIcon icon = XdgIcon::fromTheme(iconName);
 
     if (icon.availableSizes().isEmpty())
         return 0;
 
-    return new DIconProxyEngine(icon);
+    return icon.data_ptr()->engine->clone();
 }
 
 QPixmap QDeepinTheme::standardPixmap(QPlatformTheme::StandardPixmap sp, const QSizeF &size) const
@@ -90,6 +113,10 @@ QVariant QDeepinTheme::themeHint(QPlatformTheme::ThemeHint hint) const
         styleNames << QStringLiteral("fusion");
         return QVariant(styleNames);
     }
+    case QPlatformTheme::SystemIconThemeName:
+        return QVariant(gtkSetting("gtk-icon-theme-name"));
+    case QPlatformTheme::SystemIconFallbackThemeName:
+        return QVariant(gtkSetting("gtk-fallback-icon-theme"));
     default:
         break;
     }
